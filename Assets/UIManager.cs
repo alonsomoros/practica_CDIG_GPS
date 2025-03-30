@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     //public Scrollbar scrollbar;
     public List<Text> displayTexts;
     public Canvas canvasLogin, canvasRegistro, canvasCreditos, canvasNavegacion, canvasDestinosFav;
-    public Button botonOlvidadoContrasena, botonCreditos, botonVolverDeCreditos;
+    public Button botonOlvidadoContrasena, botonLogin, botonRegistro, botonCreditos, botonVolverDeCreditos;
 
     void Start()
     {
@@ -33,6 +33,8 @@ public class UIManager : MonoBehaviour
         botonOlvidadoContrasena.onClick.AddListener(Boton_Login_OlvidadoContrasena);
         botonCreditos.onClick.AddListener(Boton_Login_Creditos);
         botonVolverDeCreditos.onClick.AddListener(Boton_Creditos_Volver);
+        botonLogin.onClick.AddListener(Boton_Login_Navegacion);
+        botonRegistro.onClick.AddListener(Boton_Login_Registro);
 
         //claroOscuro.onValueChanged.AddListener(ToggleState);
         //slider.onValueChanged.AddListener(UpdateSlider);
@@ -44,6 +46,24 @@ public class UIManager : MonoBehaviour
         canvasRegistro.enabled=false;
         canvasCreditos.enabled=true;
         canvasNavegacion.enabled=false;
+        canvasDestinosFav.enabled=false;
+    }
+
+    public void Boton_Login_Registro()
+    {
+        canvasLogin.enabled=false;
+        canvasRegistro.enabled=true;
+        canvasCreditos.enabled=false;
+        canvasNavegacion.enabled=false;
+        canvasDestinosFav.enabled=false;
+    }
+
+    public void Boton_Login_Navegacion()
+    {
+        canvasLogin.enabled=false;
+        canvasRegistro.enabled=false;
+        canvasCreditos.enabled=false;
+        canvasNavegacion.enabled=true;
         canvasDestinosFav.enabled=false;
     }
 
