@@ -5,18 +5,15 @@ using System.Collections.Generic;
 public class UIManager : MonoBehaviour
 {
     public List<InputField> inputFields;
-    //public Toggle claroOscuro;
     //public Slider slider;
     //public Scrollbar scrollbar;
-    public List<Text> displayTexts;
     public Canvas canvasLogin, canvasRegistro, canvasCreditos, canvasNavegacion, canvasDestinosFav;
-    public Button botonOlvidadoContrasena, botonLogin, botonRegistro, botonCreditos, botonVolverDeCreditos;
+    public Button IS_botonOlvidadoContrasena, IS_botonLogin, IS_botonRegistro, IS_botonCreditos, C_botonVolverDeCreditos;
 
     void Start()
     {
         foreach (var input in inputFields)
         {
-            //input.onValueChanged.AddListener(delegate { UpdateText(input); });
             input.onEndEdit.AddListener(ConfirmText);
         }
         if (Application.isPlaying)
@@ -30,17 +27,14 @@ public class UIManager : MonoBehaviour
         canvasNavegacion.enabled=false;
         canvasDestinosFav.enabled=false;
 
-        botonOlvidadoContrasena.onClick.AddListener(Boton_Login_OlvidadoContrasena);
-        botonCreditos.onClick.AddListener(Boton_Login_Creditos);
-        botonVolverDeCreditos.onClick.AddListener(Boton_Creditos_Volver);
-        botonLogin.onClick.AddListener(Boton_Login_Navegacion);
-        botonRegistro.onClick.AddListener(Boton_Login_Registro);
+        IS_botonOlvidadoContrasena.onClick.AddListener(ISaR_Boton_InicioSesion_OlvidadoContrasena);
+        IS_botonCreditos.onClick.AddListener(ISaC_Boton_InicioSesion_Creditos);
+        IS_botonRegistro.onClick.AddListener(ISaR_Boton_InicioSesion_Registro);
+        IS_botonLogin.onClick.AddListener(ISaN_Boton_InicioSesion_Navegacion);
+        C_botonVolverDeCreditos.onClick.AddListener(CaIS_Boton_Creditos_Volver_InicioSesion);
 
-        //claroOscuro.onValueChanged.AddListener(ToggleState);
-        //slider.onValueChanged.AddListener(UpdateSlider);
-        //scrollbar.onValueChanged.AddListener(UpdateScrollbar);
     }
-    public void Boton_Login_Creditos()
+    public void ISaC_Boton_InicioSesion_Creditos()
     {
         canvasLogin.enabled=false;
         canvasRegistro.enabled=false;
@@ -49,7 +43,7 @@ public class UIManager : MonoBehaviour
         canvasDestinosFav.enabled=false;
     }
 
-    public void Boton_Login_Registro()
+    public void ISaR_Boton_InicioSesion_Registro()
     {
         canvasLogin.enabled=false;
         canvasRegistro.enabled=true;
@@ -58,7 +52,7 @@ public class UIManager : MonoBehaviour
         canvasDestinosFav.enabled=false;
     }
 
-    public void Boton_Login_Navegacion()
+    public void ISaN_Boton_InicioSesion_Navegacion()
     {
         canvasLogin.enabled=false;
         canvasRegistro.enabled=false;
@@ -67,7 +61,7 @@ public class UIManager : MonoBehaviour
         canvasDestinosFav.enabled=false;
     }
 
-    public void Boton_Login_OlvidadoContrasena()
+    public void ISaR_Boton_InicioSesion_OlvidadoContrasena()
     {
         canvasLogin.enabled=false;
         canvasRegistro.enabled=true;
@@ -76,7 +70,7 @@ public class UIManager : MonoBehaviour
         canvasDestinosFav.enabled=false;
     }
 
-    public void Boton_Creditos_Volver()
+    public void CaIS_Boton_Creditos_Volver_InicioSesion()
     {
         canvasLogin.enabled = true;
         canvasRegistro.enabled = false;
@@ -85,32 +79,9 @@ public class UIManager : MonoBehaviour
         canvasDestinosFav.enabled = false;
     }
 
-    /*void UpdateText(InputField input)
-    {
-        int index = inputFields.IndexOf(input); 
-        if (index >= 0 && index < displayTexts.Count)
-        {
-            displayTexts[index].text = "Texto: " + input.text;
-        }
-    }*/
     void ConfirmText(string text)
     {
         Debug.Log("Texto final confirmado: " + text);
     }
-
-    /*void ToggleState(bool isOn)
-    {
-        Debug.Log("Toggle está " + (isOn ? "Activado" : "Desactivado"));
-    }*/
-
-    /*void UpdateSlider(float value)
-    {
-        Debug.Log("Valor del slider: " + value);
-    }*/
-
-    /*void UpdateScrollbar(float value)
-    {
-        Debug.Log("Posición del scrollbar: " + value);
-    }*/
 
 }
