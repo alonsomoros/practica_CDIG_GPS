@@ -6,15 +6,21 @@ using System.Collections.Generic;
 public class UIManager : MonoBehaviour
 {
     public List<TMP_InputField> inputFields, inputFieldsObligatorios;
+    public TMP_Dropdown dropdownCombustible;
     public Canvas canvasLogin, canvasRegistro, canvasCreditos, canvasNavegacion, canvasDestinosFav;
-    public Button IS_botonOlvidadoContrasena, IS_botonLogin, IS_botonRegistro, IS_botonCreditos, 
+    public Button 
+    IS_botonOlvidadoContrasena, IS_botonLogin, IS_botonRegistro, IS_botonCreditos, 
     C_botonVolverDeCreditos, 
-    R_botonVolverDeRegistro, R_botonSiguientePaso1, R_botonVolverPaso2, R_botonSiguientePaso2, R_botonVolverPaso3, R_botonTerminarPaso3;
+    R_botonVolverDeRegistro, R_botonSiguientePaso1, R_botonVolverPaso2, R_botonSiguientePaso2, R_botonVolverPaso3, R_botonTerminarPaso3,
+
+    N_botonDestinosFavoritos, N_IniciarViaje, N_AñadirFavorito, N_botonLogo,
+    DF_botonVolverDeDestinoFavorito, DF_botonCasa, DF_botonTrabajo, DF_botonDestinoFav1, DF_botonDestinoFav2, DF_botonDestinoReciente1, DF_botonDestinoReciente2;
 
     public GameObject R_panelPaso1, R_panelPaso2, R_panelPaso3;
 
     public TMP_Text textoObligatorioNombre, textoObligatorioApellidos, textoObligatorioEmail, textoObligatorioContrasena, textoObligatorioRepetirContrasena,
-    indicePaso1, indicePaso2, indicePaso3;
+    indicePaso1, indicePaso2, indicePaso3,
+    R_Text_ConsumoMetrica;
 
     void Start()
     {
@@ -34,6 +40,13 @@ public class UIManager : MonoBehaviour
         if (Application.isPlaying)
         {
             Debug.Log("Se está ejecutando.");
+        }
+
+        // Asegúrate de que el dropdown y el texto estén asignados
+        if (dropdownCombustible != null && R_Text_ConsumoMetrica != null)
+        {
+            // Suscribirse al evento onValueChanged del dropdown
+            dropdownCombustible.onValueChanged.AddListener(OnDropdownValueChanged);
         }
 
         // Deshabilitar todos los Canvas inicialmente
@@ -75,6 +88,20 @@ public class UIManager : MonoBehaviour
     R_botonSiguientePaso2.onClick.AddListener(R_Boton_Siguiente_Paso2);
     R_botonVolverPaso3.onClick.AddListener(R_Boton_Volver_Paso3);
     R_botonTerminarPaso3.onClick.AddListener(R_Boton_Terminar_Paso3);
+
+    N_botonDestinosFavoritos.onClick.AddListener(N_Boton_DestinosFavoritos);
+    N_IniciarViaje.onClick.AddListener(N_Boton_IniciarViaje);
+    N_AñadirFavorito.onClick.AddListener(N_Boton_AñadirFavorito);
+    N_botonLogo.onClick.AddListener(CaIS_Boton_Creditos_Volver_a_InicioSesion);
+
+    DF_botonVolverDeDestinoFavorito.onClick.AddListener(DF_Boton_Volver_a_Navegación);
+    DF_botonCasa.onClick.AddListener(DF_Boton_Volver_a_Navegación);
+    DF_botonTrabajo.onClick.AddListener(DF_Boton_Volver_a_Navegación);
+    DF_botonDestinoFav1.onClick.AddListener(DF_Boton_Volver_a_Navegación);
+    DF_botonDestinoFav2.onClick.AddListener(DF_Boton_Volver_a_Navegación);
+    DF_botonDestinoReciente1.onClick.AddListener(DF_Boton_Volver_a_Navegación);
+    DF_botonDestinoReciente2.onClick.AddListener(DF_Boton_Volver_a_Navegación);
+
     }
 
     public void ISaR_Boton_InicioSesion_OlvidadoContrasena_a_Registro()
@@ -213,6 +240,27 @@ public class UIManager : MonoBehaviour
         resetAll(); // Reiniciar todos los campos al finalizar el registro
     }
 
+
+    public void N_Boton_DestinosFavoritos()
+    {
+        cambiarCanvas(canvasDestinosFav);
+    }
+
+    public void N_Boton_IniciarViaje()
+    {
+        cambiarCanvas(canvasDestinosFav);
+    }
+
+    public void N_Boton_AñadirFavorito()
+    {
+        Debug.Log("<[ Añadido a Favoritos ]>");
+    }
+
+    public void DF_Boton_Volver_a_Navegación()
+    {
+        cambiarCanvas(canvasNavegacion);
+    }
+
     public void cambiarCanvas(Canvas canvas)
     {
         canvasLogin.enabled = false;
@@ -244,6 +292,26 @@ public class UIManager : MonoBehaviour
         {
             input2.text = string.Empty;
             input2.image.color = Color.white; // Cambia al color original
+        }
+    }
+
+    void OnDropdownValueChanged(int value)
+    {
+        // Cambiar el texto dependiendo del valor seleccionado
+        switch (value)
+        {
+            case 0:
+                R_Text_ConsumoMetrica.text = "[ L/100 km ]";
+                break;
+            case 1:
+                R_Text_ConsumoMetrica.text = "[ L/100 km ]";
+                break;
+            case 2:
+                R_Text_ConsumoMetrica.text = "[ KWh/100 km ]";
+                break;
+            default:
+                R_Text_ConsumoMetrica.text = "";
+                break;
         }
     }
 }
