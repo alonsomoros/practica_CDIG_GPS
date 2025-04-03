@@ -8,13 +8,12 @@ public class UIManager : MonoBehaviour
     public List<TMP_InputField> inputFields, inputFieldsObligatorios;
     public TMP_Dropdown dropdownCombustible;
     public Canvas canvasLogin, canvasRegistro, canvasCreditos, canvasNavegacion, canvasDestinosFav;
-    public Button 
-    IS_botonOlvidadoContrasena, IS_botonLogin, IS_botonRegistro, IS_botonCreditos, 
-    C_botonVolverDeCreditos, 
+    public List<Button> IS_Botones, C_Botones, R_Botones, N_Botones, DF_Botones;
+    /*public Button C_botonVolverDeCreditos, 
     R_botonVolverDeRegistro, R_botonSiguientePaso1, R_botonVolverPaso2, R_botonSiguientePaso2, R_botonVolverPaso3, R_botonTerminarPaso3,
 
     N_botonDestinosFavoritos, N_IniciarViaje, N_AñadirFavorito, N_botonLogo,
-    DF_botonVolverDeDestinoFavorito, DF_botonCasa, DF_botonTrabajo, DF_botonDestinoFav1, DF_botonDestinoFav2, DF_botonDestinoReciente1, DF_botonDestinoReciente2;
+    DF_botonVolverDeDestinoFavorito, DF_botonCasa, DF_botonTrabajo, DF_botonDestinoFav1, DF_botonDestinoFav2, DF_botonDestinoReciente1, DF_botonDestinoReciente2;*/
 
     public GameObject R_panelPaso1, R_panelPaso2, R_panelPaso3;
 
@@ -74,34 +73,108 @@ public class UIManager : MonoBehaviour
     }
 
     private void ConfigurarEventosBotones() 
-    {   
-    IS_botonOlvidadoContrasena.onClick.AddListener(ISaR_Boton_InicioSesion_OlvidadoContrasena_a_Registro);
-    IS_botonLogin.onClick.AddListener(ISaN_Boton_InicioSesion_a_Navegacion);
-    IS_botonRegistro.onClick.AddListener(ISaR_Boton_InicioSesion_a_Registro);
-    IS_botonCreditos.onClick.AddListener(ISaC_Boton_InicioSesion_a_Creditos);
+    {
+        configurarEventosBotones_InicioSesion();
+        configurarEventosBotones_Registro();
+        configurarEventosBotones_Creditos();
+        configurarEventosBotones_Navegacion();
+        configurarEventosBotones_DestinosFavoritos();
+    }
 
-    C_botonVolverDeCreditos.onClick.AddListener(CaIS_Boton_Creditos_Volver_a_InicioSesion);
+    public void configurarEventosBotones_InicioSesion()
+    {
+        foreach (Button b in IS_Botones)
+        {
+            if (b.name == "IS_Botón_OlvidadoContraseña")
+            {
+                b.onClick.AddListener(ISaR_Boton_InicioSesion_OlvidadoContrasena_a_Registro);
+            }
+            else if (b.name == "IS_Botón_IniciarSesión-Navegación")
+            {
+                b.onClick.AddListener(ISaN_Boton_InicioSesion_a_Navegacion);
+            }
+            else if (b.name == "IS_Boton_Regístrate")
+            {
+                b.onClick.AddListener(ISaR_Boton_InicioSesion_a_Registro);
+            }
+            else if (b.name == "IS_Botón_IniciarSesión-Créditos")
+            {
+                b.onClick.AddListener(ISaC_Boton_InicioSesion_a_Creditos);
+            }
+        }        
+    }
 
-    R_botonVolverDeRegistro.onClick.AddListener(RaIS_Boton_Registro_Volver_a_InicioSesion);
-    R_botonSiguientePaso1.onClick.AddListener(R_Botón_Siguiente_Verificar_Campos_Paso1);
-    R_botonVolverPaso2.onClick.AddListener(R_Boton_Volver_Paso2);    
-    R_botonSiguientePaso2.onClick.AddListener(R_Boton_Siguiente_Paso2);
-    R_botonVolverPaso3.onClick.AddListener(R_Boton_Volver_Paso3);
-    R_botonTerminarPaso3.onClick.AddListener(R_Boton_Terminar_Paso3);
+    public void configurarEventosBotones_Creditos()
+    {
+        foreach (Button b in C_Botones)
+        {
+            if (b.name == "C_Button_Volver_a_Login")
+            {
+                b.onClick.AddListener(CaIS_Boton_Creditos_Volver_a_InicioSesion);
+            }
+        }   
+    }
 
-    N_botonDestinosFavoritos.onClick.AddListener(N_Boton_DestinosFavoritos);
-    N_IniciarViaje.onClick.AddListener(N_Boton_IniciarViaje);
-    N_AñadirFavorito.onClick.AddListener(N_Boton_AñadirFavorito);
-    N_botonLogo.onClick.AddListener(CaIS_Boton_Creditos_Volver_a_InicioSesion);
+    public void configurarEventosBotones_Registro()
+    {
+        foreach (Button b in R_Botones)
+        {
+            if (b.name == "R_Button_Volver_a_Login")
+            {
+                b.onClick.AddListener(RaIS_Boton_Registro_Volver_a_InicioSesion);
+            }
+            else if (b.name == "R_Button_Siguiente_Paso1")
+            {
+                b.onClick.AddListener(R_Botón_Siguiente_Verificar_Campos_Paso1);
+            }
+            else if (b.name == "R_Button_Volver_Paso2")
+            {
+                b.onClick.AddListener(R_Boton_Volver_Paso2);
+            }
+            else if (b.name == "R_Button_Siguiente_Paso2")
+            {
+                b.onClick.AddListener(R_Boton_Siguiente_Paso2);
+            }
+            else if (b.name == "R_Button_Volver_Paso3")
+            {
+                b.onClick.AddListener(R_Boton_Volver_Paso3);
+            } 
+            else if (b.name == "R_Button_Terminar_Paso3")
+            {
+                b.onClick.AddListener(R_Boton_Terminar_Paso3);
+            }
+        }       
+    }
 
-    DF_botonVolverDeDestinoFavorito.onClick.AddListener(DF_Boton_Volver_a_Navegación);
-    DF_botonCasa.onClick.AddListener(DF_Boton_Volver_a_Navegación);
-    DF_botonTrabajo.onClick.AddListener(DF_Boton_Volver_a_Navegación);
-    DF_botonDestinoFav1.onClick.AddListener(DF_Boton_Volver_a_Navegación);
-    DF_botonDestinoFav2.onClick.AddListener(DF_Boton_Volver_a_Navegación);
-    DF_botonDestinoReciente1.onClick.AddListener(DF_Boton_Volver_a_Navegación);
-    DF_botonDestinoReciente2.onClick.AddListener(DF_Boton_Volver_a_Navegación);
+    public void configurarEventosBotones_DestinosFavoritos()
+    {
+        foreach (Button b in DF_Botones)
+        {
+            b.onClick.AddListener(DF_Boton_Volver_a_Navegación);
+        }
+    }
 
+    public void configurarEventosBotones_Navegacion()
+    {
+        foreach (Button b in N_Botones)
+        {
+            if (b.name == "N_Button_AñadirFav")
+            {
+                b.onClick.AddListener(N_Boton_DestinosFavoritos);
+            }
+            else if (b.name == "N_Button_DetinosFav")
+            {
+                b.onClick.AddListener(N_Boton_IniciarViaje);
+            }
+            else if (b.name == "N_Button_IniciarViaje")
+            {
+                b.onClick.AddListener(N_Boton_AñadirFavorito);
+            }
+            else if (b.name == "N_Button_Logo")
+            {
+                b.onClick.AddListener(CaIS_Boton_Creditos_Volver_a_InicioSesion);
+            }
+        }        
     }
 
     public void ISaR_Boton_InicioSesion_OlvidadoContrasena_a_Registro()
