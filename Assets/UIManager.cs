@@ -5,21 +5,15 @@ using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
-    public List<TMP_InputField> inputFields, inputFieldsObligatorios;
+    public List<TMP_InputField> inputFields, R_inputFieldsObligatorios, IS_inputFieldsObligatorios;
     public TMP_Dropdown dropdownCombustible;
     public Canvas canvasLogin, canvasRegistro, canvasCreditos, canvasNavegacion, canvasDestinosFav;
     public List<Button> IS_Botones, C_Botones, R_Botones, N_Botones, DF_Botones;
-    /*public Button C_botonVolverDeCreditos, 
-    R_botonVolverDeRegistro, R_botonSiguientePaso1, R_botonVolverPaso2, R_botonSiguientePaso2, R_botonVolverPaso3, R_botonTerminarPaso3,
-
-    N_botonDestinosFavoritos, N_IniciarViaje, N_AñadirFavorito, N_botonLogo,
-    DF_botonVolverDeDestinoFavorito, DF_botonCasa, DF_botonTrabajo, DF_botonDestinoFav1, DF_botonDestinoFav2, DF_botonDestinoReciente1, DF_botonDestinoReciente2;*/
-
-    public GameObject R_panelPaso1, R_panelPaso2, R_panelPaso3;
+    public GameObject R_panelPaso1, R_panelPaso2, R_panelPaso3, N_panelSideBar, N_panelViaje, N_panelIndicaciones;
 
     public TMP_Text textoObligatorioNombre, textoObligatorioApellidos, textoObligatorioEmail, textoObligatorioContrasena, textoObligatorioRepetirContrasena,
     indicePaso1, indicePaso2, indicePaso3,
-    R_Text_ConsumoMetrica;
+    R_Text_ConsumoMetrica, N_TiempoEstimado, N_DistanciaEstimado;
 
     void Start()
     {
@@ -32,7 +26,7 @@ public class UIManager : MonoBehaviour
             Debug.Log("Se está ejecutando.");
         }
 
-        foreach (var input2 in inputFieldsObligatorios)
+        foreach (var input2 in R_inputFieldsObligatorios)
         {
             input2.onEndEdit.AddListener(ConfirmText);
         }
@@ -56,6 +50,15 @@ public class UIManager : MonoBehaviour
         ConfigurarEventosBotones();
     }
 
+    void Update()
+    {
+        // Obtener la hora actual del sistema y sumar 5 minutos
+        System.DateTime horaActual = System.DateTime.Now.AddMinutes(5);
+
+        // Mostrar solo la hora y los minutos
+        N_TiempoEstimado.text = horaActual.ToString("HH:mm") + " min";
+    }
+
     private void InicializarCanvas()
     {
     canvasLogin.enabled = true;
@@ -70,6 +73,10 @@ public class UIManager : MonoBehaviour
         R_panelPaso1.SetActive(true);
         R_panelPaso2.SetActive(false);
         R_panelPaso3.SetActive(false);
+
+        N_panelSideBar.SetActive(true);
+        N_panelViaje.SetActive(false);
+        N_panelIndicaciones.SetActive(false);
     }
 
     private void ConfigurarEventosBotones() 
@@ -91,7 +98,7 @@ public class UIManager : MonoBehaviour
             }
             else if (b.name == "IS_Botón_IniciarSesión-Navegación")
             {
-                b.onClick.AddListener(ISaN_Boton_InicioSesion_a_Navegacion);
+                b.onClick.AddListener(L_Botón_Login_Verificar_Campos);
             }
             else if (b.name == "IS_Boton_Regístrate")
             {
@@ -160,19 +167,22 @@ public class UIManager : MonoBehaviour
         {
             if (b.name == "N_Button_AñadirFav")
             {
-                b.onClick.AddListener(N_Boton_DestinosFavoritos);
+                b.onClick.AddListener(N_Boton_AñadirFavorito);
             }
             else if (b.name == "N_Button_DetinosFav")
             {
-                b.onClick.AddListener(N_Boton_IniciarViaje);
+                b.onClick.AddListener(N_Boton_DestinosFavoritos);
             }
             else if (b.name == "N_Button_IniciarViaje")
             {
-                b.onClick.AddListener(N_Boton_AñadirFavorito);
+                b.onClick.AddListener(N_Boton_IniciarViaje);
             }
             else if (b.name == "N_Button_Logo")
             {
                 b.onClick.AddListener(CaIS_Boton_Creditos_Volver_a_InicioSesion);
+            } else if( b.name == "N_Button_Terminar")
+            {
+                b.onClick.AddListener(N_Boton_TerminarViaje);
             }
         }        
     }
@@ -184,11 +194,6 @@ public class UIManager : MonoBehaviour
         indicePaso2.color = Color.white;
         indicePaso3.color = Color.white;
         cambiarCanvas(canvasRegistro);
-    }
-
-    public void ISaN_Boton_InicioSesion_a_Navegacion()
-    {
-        cambiarCanvas(canvasNavegacion);
     }
     
     public void ISaR_Boton_InicioSesion_a_Registro()
@@ -221,7 +226,7 @@ public class UIManager : MonoBehaviour
     {
         bool todosRellenados = true;
 
-        foreach (var inputField in inputFieldsObligatorios)
+        foreach (var inputField in R_inputFieldsObligatorios)
         {
 
             Debug.Log("Procesando campo: " + inputField.name);
@@ -280,6 +285,42 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void L_Botón_Login_Verificar_Campos()
+    {
+        bool todosRellenados = true;
+
+        foreach (var inputField in IS_inputFieldsObligatorios)
+        {
+
+            Debug.Log("Procesando campo: " + inputField.name);
+
+            if (string.IsNullOrWhiteSpace(inputField.text)) // Comprobar si el campo está vacío
+            {
+                todosRellenados = false;
+
+                // Cambiar el color del borde o texto del InputField a rojo
+                if (ColorUtility.TryParseHtmlString("#FFCCCC", out Color softRed))
+                {
+                    inputField.image.color = softRed; // Cambiar el fondo a un rojo suave
+                }
+            }
+            else
+            {
+                // Restaurar el color original si el campo está rellenado
+                inputField.image.color = Color.white; // Cambia al color original
+            }
+        }
+
+        if (todosRellenados)
+        {
+            cambiarCanvas(canvasNavegacion);
+        }
+        else
+        {
+            Debug.Log("Por favor, rellena todos los campos obligatorios.");
+        }
+    }
+
     public void R_Boton_Volver_Paso2()
     {
         R_panelPaso1.SetActive(true);
@@ -321,7 +362,17 @@ public class UIManager : MonoBehaviour
 
     public void N_Boton_IniciarViaje()
     {
-        cambiarCanvas(canvasDestinosFav);
+        N_panelSideBar.SetActive(false);
+        N_panelViaje.SetActive(true);
+        N_panelIndicaciones.SetActive(true);
+
+    }
+
+    public void N_Boton_TerminarViaje()
+    {
+        N_panelSideBar.SetActive(true);
+        N_panelViaje.SetActive(false);
+        N_panelIndicaciones.SetActive(false);
     }
 
     public void N_Boton_AñadirFavorito()
@@ -361,7 +412,7 @@ public class UIManager : MonoBehaviour
             input.image.color = Color.white; // Cambia al color original
         }
 
-        foreach (var input2 in inputFieldsObligatorios)
+        foreach (var input2 in R_inputFieldsObligatorios)
         {
             input2.text = string.Empty;
             input2.image.color = Color.white; // Cambia al color original
