@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro; // Importar el espacio de nombres de TextMeshPro
 
 public class PasswordFieldController : MonoBehaviour
 {
-    [SerializeField] private InputField passwordField;
+    [SerializeField] private TMP_InputField passwordField; // Cambiado a TMP_InputField
     [SerializeField] private Button showPasswordButton;
     [SerializeField] private Image showPasswordIcon; // Referencia a la imagen del botón (opcional)
     [SerializeField] private Sprite eyeOpenSprite; // Sprite para cuando la contraseña es visible
@@ -15,11 +16,11 @@ public class PasswordFieldController : MonoBehaviour
     void Start()
     {
         // Configurar el campo para que use caracteres de contraseña (asteriscos)
-        passwordField.contentType = InputField.ContentType.Password;
-        
+        passwordField.contentType = TMP_InputField.ContentType.Password;
+
         // Añadir listener al botón de mostrar/ocultar contraseña
         showPasswordButton.onClick.AddListener(TogglePasswordVisibility);
-        
+
         // Añadir listener para capturar cambios en el texto
         passwordField.onValueChanged.AddListener(OnPasswordChanged);
     }
@@ -33,12 +34,12 @@ public class PasswordFieldController : MonoBehaviour
     private void TogglePasswordVisibility()
     {
         isPasswordVisible = !isPasswordVisible;
-        
+
         if (isPasswordVisible)
         {
             // Mostrar contraseña en texto plano
-            passwordField.contentType = InputField.ContentType.Standard;
-            
+            passwordField.contentType = TMP_InputField.ContentType.Standard;
+
             // Cambiar el icono si es necesario
             if (showPasswordIcon != null && eyeOpenSprite != null)
             {
@@ -48,18 +49,18 @@ public class PasswordFieldController : MonoBehaviour
         else
         {
             // Ocultar contraseña con asteriscos
-            passwordField.contentType = InputField.ContentType.Password;
-            
+            passwordField.contentType = TMP_InputField.ContentType.Password;
+
             // Cambiar el icono si es necesario
             if (showPasswordIcon != null && eyeClosedSprite != null)
             {
                 showPasswordIcon.sprite = eyeClosedSprite;
             }
         }
-        
+
         // Es necesario refrescar el campo para que se apliquen los cambios
         passwordField.ForceLabelUpdate();
-        
+
         // Mantener el foco después de cambiar la visibilidad (opcional)
         passwordField.Select();
         passwordField.ActivateInputField();
