@@ -629,7 +629,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 471090603}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999934
+  m_Size: 0.9998514
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1573,7 +1573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &83282893
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3494,8 +3494,7 @@ MonoBehaviour:
   textoObligatorioContrasena: {fileID: 759298245}
   textoObligatorioRepetirContrasena: {fileID: 1153935796}
   R_Text_ConsumoMetrica: {fileID: 973691064}
-  N_TiempoEstimado: {fileID: 1847878830}
-  N_DistanciaEstimado: {fileID: 553089384}
+  N_TiempoEstimado: {fileID: 1892812933}
 --- !u!4 &185396327
 Transform:
   m_ObjectHideFlags: 0
@@ -6499,7 +6498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &462963061
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7295,7 +7294,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -144, y: 7.7369995}
+  m_AnchoredPosition: {x: -144.00002, y: 7.7369995}
   m_SizeDelta: {x: -868.951, y: -161.898}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &553089384
@@ -7347,8 +7346,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 49
+  m_fontSizeBase: 49
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12368,10 +12367,10 @@ RectTransform:
   m_Father: {fileID: 281791899}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 224.08002, y: -1232}
-  m_SizeDelta: {x: 200.21, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 295, y: -1226}
+  m_SizeDelta: {x: -723.39, y: -2962}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &973691064
 MonoBehaviour:
@@ -12393,7 +12392,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Unidad
+  m_text: L/100 km
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12427,7 +12426,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -14674,7 +14673,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00006164222}
+  m_AnchoredPosition: {x: 0, y: 0.0006050548}
   m_SizeDelta: {x: 0, y: 1336.1}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1314812324
@@ -22580,8 +22579,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 49
+  m_fontSizeBase: 49
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

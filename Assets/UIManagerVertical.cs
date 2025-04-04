@@ -12,7 +12,7 @@ public class UIManagerVertical : MonoBehaviour
     public GameObject N_panelInicio, N_panelViaje;
 
     public TMP_Text textoObligatorioNombre, textoObligatorioApellidos, textoObligatorioEmail, textoObligatorioContrasena, textoObligatorioRepetirContrasena,
-        R_Text_ConsumoMetrica, N_TiempoEstimado, N_DistanciaEstimado;
+        R_Text_ConsumoMetrica, N_TiempoEstimado;
 
     void Start()
     {
@@ -55,7 +55,7 @@ public class UIManagerVertical : MonoBehaviour
         System.DateTime horaActual = System.DateTime.Now.AddMinutes(5);
 
         // Mostrar solo la hora y los minutos
-        N_TiempoEstimado.text = horaActual.ToString("HH:mm") + " min";
+        N_TiempoEstimado.text = horaActual.ToString("HH:mm");
     }
 
     private void InicializarCanvas()
@@ -192,6 +192,7 @@ public class UIManagerVertical : MonoBehaviour
     private void R_Botón_Siguiente_Verificar_Campos_Paso1()
     {
         bool todosRellenados = true;
+        bool contraseñaCorrecta = true;
 
         foreach (var inputField in R_inputFieldsObligatorios)
         {
@@ -215,10 +216,11 @@ public class UIManagerVertical : MonoBehaviour
             }
         }
 
+        Debug.Log("Contaseñas: " + textoObligatorioContrasena.text + " , " + textoObligatorioRepetirContrasena.text );
         // Verificar que las contraseñas coincidan
         if (textoObligatorioContrasena.text != textoObligatorioRepetirContrasena.text)
         {
-            todosRellenados = false;
+            contraseñaCorrecta = false;
 
             // Cambiar el color de los campos de contraseña a rojo
             if (ColorUtility.TryParseHtmlString("#bf4934", out Color softRed_v2))
@@ -238,11 +240,11 @@ public class UIManagerVertical : MonoBehaviour
         }
 
 
-        if (todosRellenados)
+        if (todosRellenados && contraseñaCorrecta)
         {
             cambiarCanvas(canvasLogin);
         }
-        else
+        else if(!todosRellenados)
         {
             Debug.Log("Por favor, rellena todos los campos obligatorios.");
         }
